@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
+import scipy.stats as st
 
-from scipy.stats import norm
-
+from scipy.stats import gamma
 
 chat_id = 1307537098 # Ваш chat ID, не меняйте название переменной
 
@@ -11,8 +11,12 @@ def solution(p: float, x: np.array) -> tuple:
     # Это будет вашим решением
     # Не меняйте название функции и её аргументы
     n=len(x)
-    alpha = 1 - p
-    left = (-min(-x) - 1 / 2) / (14**2 / 2)
-    right = (-np.log(alpha) / n -min(-x) - 1 / 2) / (14**2 / 2)
+    a1 =(1+p)/2
+    a2=(1-p)/2
+    z1=st.gamma.ppf(a1, a=n, scale=1/n)
+    z2=st.gamma.ppf(a2, a=n, scale=1/n)
+    s=sum(x)/n
+    left = 2*s/(14**2) - 2/(2*14*14) + 2*z2/(14**2)
+    right = 2*s/(14**2) - 2/(2*14*14) + 2*z1/(14**2)
     return left, \
            right
