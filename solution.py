@@ -13,7 +13,7 @@ def solution(p: float, x: np.array) -> tuple:
     n=len(x)
     a1=(1-p)/2
     a2=(1+p)/2
-    left = (2*(-np.log(a1)+x-1/2))/(14**2)
-    right = (2*(-np.log(a2)+x-1/2))/(14**2)
+    left = (2*(-np.log(a1)+min(x)-1/2))/(14**2)
+    right = (2*(-np.log(a2)+max(x)-1/2))/(14**2)
     return left, \
            right
